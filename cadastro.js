@@ -79,3 +79,10 @@ const url = `https://viacep.com.br/ws/${cep}/json/`;
 
 // Evento para buscar o CEP automaticamente ao perder o foco do campo
 document.getElementById('CEP').addEventListener('focusout', pesquisarCep);
+
+// Evento para validação completa ao submeter o formulário
+document.getElementById('formCadastro').addEventListener('submit', (event) => {
+    if (!validarDadosPessoais()) {
+        event.preventDefault(); // Impede o envio do formulário se houver erros
+    }
+});
