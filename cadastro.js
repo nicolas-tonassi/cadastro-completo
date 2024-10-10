@@ -76,3 +76,6 @@ const url = `https://viacep.com.br/ws/${cep}/json/`;
         alert('CEP inválido!');
     }
 };
+
+// Evento para buscar o CEP automaticamente ao perder o foco do campo
+document.getElementById('CEP').addEventListener('focusout', pesquisarCep);
