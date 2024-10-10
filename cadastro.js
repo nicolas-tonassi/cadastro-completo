@@ -22,3 +22,8 @@ const validarCPF = (cpf) => {
     return resto === parseInt(cpf.substring(10, 11));
 };
 
+// Mensagem de Erro
+const mostrarErro = (campo, mensagem) => {
+    alert(mensagem);
+    campo.focus();
+};
