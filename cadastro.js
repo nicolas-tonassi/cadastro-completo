@@ -42,3 +42,37 @@ const validarDadosPessoais = () => {
     }
     return true;
 };
+
+// Funções para o Consumo da API ViaCEP
+const limparFormularioEndereco = () => {
+    document.getElementById('logradouro').value = '';
+    document.getElementById('bairro').value = '';
+    document.getElementById('cidade').value = '';
+    document.getElementById('uf').value = '';
+};
+ 
+const preencherFormularioEndereco = (endereco) => {
+    document.getElementById('logradouro').value = endereco.logradouro;
+    document.getElementById('bairro').value = endereco.bairro;
+    document.getElementById('cidade').value = endereco.localidade;
+    document.getElementById('uf').value = endereco.uf;
+};
+ 
+const cepValido = (cep) => /^[0-9]{8}$/.test(cep);
+ 
+const pesquisarCep = async () => {
+    const cep = document.getElementById('CEP').value.replace(/\D/g, '');
+    limparFormularioEndereco();
+    if (cepValido(cep)) {
+const url = `https://viacep.com.br/ws/${cep}/json/`;
+        const dados = await fetch(url);
+        const endereco = await dados.json();
+        if (endereco.erro) {
+            alert('CEP não encontrado!');
+        } else {
+            preencherFormularioEndereco(endereco);
+        }
+    } else {
+        alert('CEP inválido!');
+    }
+};
